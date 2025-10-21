@@ -6,7 +6,6 @@ import { BannerComponent } from './banner/banner/banner.component';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    standalone: true,
     imports: [BannerComponent, RouterOutlet]
 })
 export class AppComponent {
