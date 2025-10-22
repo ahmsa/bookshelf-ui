@@ -6,11 +6,14 @@ import { AppComponent } from './app/app.component';
 import { AppRoutingModule } from './app/app-routing.module';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { providePrimeNG } from 'primeng/config';
+import { provideHttpClient } from '@angular/common/http';
 
 
 bootstrapApplication(AppComponent, {
     providers: [
       importProvidersFrom(BrowserModule, AppRoutingModule), 
-      providePrimeNG()]
+      providePrimeNG(),
+      provideHttpClient()
+    ]
 })
   .catch(err => console.error(err));
