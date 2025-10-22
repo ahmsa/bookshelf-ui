@@ -20,7 +20,7 @@ export class AuthorService {
     return this.http.post<Author>(`${this.URL}/save`, author, { headers });
   }
 
-  public deleteAuthor(id: string): void {
+  public deleteAuthor(id: number): void {
     let param: HttpParams = new HttpParams();
     param.set('id', id);
     this.http.delete(this.URL, { params: param })

@@ -20,7 +20,7 @@ export class GenreService {
     return this.http.put<Genre>(`${this.URL}/save`, genre);
   }
 
-  public deleteGenre(id: string){
+  public deleteGenre(id: number){
     let param: HttpParams = new HttpParams().set("id", id);
     this.http.delete<Genre>(`${this.URL}/delete`, { params: param });
   }
