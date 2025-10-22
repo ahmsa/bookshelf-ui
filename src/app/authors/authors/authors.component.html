@@ -1,6 +1,11 @@
 <p>authors works!</p>
 
-@for (author of (authors$ | async); track $index) {
-    name: <div>{{ author.name }}</div>
-    country: <div>{{ author.country }}</div>
+@if (authors$ | async; as authors) {
+  <!-- This block is displayed when the data arrives -->
+  @for (author of authors; track author) {
+    <div>{{ author }}</div>
+  }
+} @else {
+  <!-- This block is displayed while the data is loading -->
+  <div>Loading items...</div>
 }
