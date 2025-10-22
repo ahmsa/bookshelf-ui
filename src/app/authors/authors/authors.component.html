@@ -1,1 +1,6 @@
 <p>authors works!</p>
+
+@for (author of (authors$ | async); track $index) {
+    name: <div>{{ author.name }}</div>
+    country: <div>{{ author.country }}</div>
+}
