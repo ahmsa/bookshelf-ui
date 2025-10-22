@@ -9,7 +9,7 @@ import { AuthorService } from '../author-service';
   templateUrl: './author-card.component.html',
   styleUrls: ['./author-card.component.css']
 })
-export class AuthorCard {
+export class AuthorCardComponent {
   author : Author = new Author();
 
   public constructor(private authorService: AuthorService) {}

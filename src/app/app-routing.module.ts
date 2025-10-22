@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthorCard } from './authors/author-card/author-card.component';
-import { Authors } from './authors/authors/authors.component';
+import { AuthorCardComponent } from './authors/author-card/author-card.component';
+import { AuthorsComponent } from './authors/authors/authors.component';
 
 const routes: Routes = [
-  { path: 'authorDetails', component: AuthorCard },
-  { path: 'authors', component: Authors }
+  { path: 'authorDetails', component: AuthorCardComponent },
+  { path: 'authors', component: AuthorsComponent }
 ];
 
 @NgModule({
