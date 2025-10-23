@@ -1,0 +1,10 @@
+<p>author-card works!</p>
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" [(ngModel)]="author.name" required>
+
+  <label for="country">Country:</label>
+  <input type="text" id="country" name="country" [(ngModel)]="author.country" required>
+
+  <button type="submit" [disabled]="userForm.invalid">Submit</button>
+</form>
