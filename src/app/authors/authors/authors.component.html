@@ -2,9 +2,6 @@
 
 @if (authors$ | async; as authors) {
   <!-- This block is displayed when the data arrives -->
-  @for (author of authors; track author) {
-    <div>{{ author }}</div>
-  }
 
   <p-table [value]="authors">
     <ng-template pTemplate="header">
