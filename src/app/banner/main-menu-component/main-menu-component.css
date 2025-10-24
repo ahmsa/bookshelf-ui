@@ -1,0 +1,7 @@
+/* Style the menu trigger button like the Twitter icon */
+button[mat-button] {
+  height: 24px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
