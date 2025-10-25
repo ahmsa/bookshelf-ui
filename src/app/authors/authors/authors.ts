@@ -11,10 +11,10 @@ import { Author } from "../../../data/author";
     AsyncPipe,
     TableModule
   ],
-  templateUrl: './authors.component.html',
-  styleUrls: ['./authors.component.css']
+  templateUrl: './authors.html',
+  styleUrls: ['./authors.css']
 })
-export class AuthorsComponent {
+export class Authors {
   public authors$: Observable<Author[]> = this.authorsService.getAllAuthors();
 
   public constructor(private authorsService: AuthorService) { }

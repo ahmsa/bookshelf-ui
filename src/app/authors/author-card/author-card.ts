@@ -6,10 +6,10 @@ import { AuthorService } from '../author-service';
 @Component({
   selector: 'app-author-card',
   imports: [FormsModule],
-  templateUrl: './author-card.component.html',
-  styleUrls: ['./author-card.component.css']
+  templateUrl: './author-card.html',
+  styleUrls: ['./author-card.css']
 })
-export class AuthorCardComponent {
+export class AuthorCard {
   author : Author = new Author();
 
   public constructor(private authorService: AuthorService) {}

@@ -4,12 +4,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-main-menu-component',
+  selector: 'app-main-menu',
   standalone: true,
   imports: [MatMenuModule, MatButtonModule, RouterModule],
-  templateUrl: './main-menu-component.html',
-  styleUrls: ['./main-menu-component.css']
+  templateUrl: './main-menu.html',
+  styleUrls: ['./main-menu.css']
 })
-export class MainMenuComponent {
+export class MainMenu {
 
 }
