@@ -1,6 +1,6 @@
 @if (authors$ | async; as authors) {
   <!-- This block is displayed when the data arrives -->
-
+  <a routerLink="/authorDetails" class="button">Add Author</a>
   <p-table [value]="authors">
     <ng-template pTemplate="header">
       <tr>

@@ -11,11 +11,15 @@ import { BookDetails } from './books/book-details/book-details';
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'authorDetails/:id', component: AuthorCard },
+  { path: 'authorDetails', component: AuthorCard },
   { path: 'authors', component: Authors },
-  { path: 'genre/:id', component: GenreCard },
+  { path: 'genreDetails/:id', component: GenreCard },
+  { path: 'authors', component: Authors },
+  { path: 'genreDetails', component: GenreCard },
   { path: 'genres', component: Genres },
   { path: 'books', component: Books },
-  { path: 'bookDetails/:id', component: BookDetails }
+  { path: 'bookDetails/:id', component: BookDetails },
+  { path: 'bookDetails', component: BookDetails }
 ];
 
 

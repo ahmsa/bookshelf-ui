@@ -4,12 +4,14 @@ import { AsyncPipe } from '@angular/common';
 import { TableModule } from "primeng/table";
 import { Observable } from "rxjs";
 import { Author } from "../../../data/author";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-authors',
   imports: [
     AsyncPipe,
-    TableModule
+    TableModule,
+    RouterLink
   ],
   templateUrl: './authors.html',
   styleUrls: ['./authors.css']
