@@ -38,10 +38,10 @@ export class AuthorService {
     );
   }
 
-  public deleteAuthor(id: number): void {
+  public deleteAuthor(id: number): Observable<void> {
     let param: HttpParams = new HttpParams();
     param.set('id', id);
-    this.http.delete(this.URL, { params: param }).pipe(
+    return this.http.delete<void>(this.URL + `?id=${id}`, { params: param }).pipe(
       tap(() => {
         this.authorMap.delete(id);
       })
