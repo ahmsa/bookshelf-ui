@@ -41,12 +41,13 @@ export class AuthorCard implements OnInit {
     this.authorService.saveAuthor(formData).subscribe({
       next: (response) => {
         console.log('Author saved successfully:', response);
+        // Navigate back after save completes so the authors list can show the new author
+        this.location.back();
       },
       error: (error) => {
         console.error('Error saving author:', error);
       }
     });
-    this.location.back();
   }
 
   onCancel() {

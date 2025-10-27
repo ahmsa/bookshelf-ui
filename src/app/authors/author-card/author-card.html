@@ -1,6 +1,6 @@
 <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
   <label for="id">ID:</label>
-  <input type="text" id="id" name="id" [(ngModel)]="author.id" required>
+  <input readonly type="text" id="id" name="id" [(ngModel)]="author.id">
 
   <label for="name">Name:</label>
   <input type="text" id="name" name="name" [(ngModel)]="author.name" required>

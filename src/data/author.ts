@@ -1,5 +1,5 @@
 export class Author {
-    id: number = 0;
+    id: number | null = null;
     name: string = '';
     country: string = '';
 

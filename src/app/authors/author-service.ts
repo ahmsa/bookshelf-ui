@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import { Observable, of } from "rxjs";
+import { from, Observable, of } from "rxjs";
 import { map, tap } from 'rxjs/operators';
 import { Author } from "../../data/author";
 
@@ -9,7 +9,7 @@ import { Author } from "../../data/author";
   providedIn: 'root'
 })
 export class AuthorService {
-  authorMap: Map<number, Author> = new Map<number, Author>();
+  authorMap: Map<number | null, Author> = new Map<number | null, Author>();
 
   private readonly URL = `${environment.baseUrl}/authors`;
   public constructor(private http: HttpClient) {}
@@ -17,7 +17,7 @@ export class AuthorService {
   public getAllAuthors() : Observable<Author[]> {
     if(this.authorMap.size > 0) {
       console.log('Returning authors from cache');
-      return this.authorMap.values() as unknown as Observable<Author[]>;
+      return of(Array.from(this.authorMap.values()));
     }
 
     return this.http.get<Author[]>(this.URL).pipe(

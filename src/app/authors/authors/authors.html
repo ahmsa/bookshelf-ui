@@ -11,7 +11,11 @@
     </ng-template>
     <ng-template pTemplate="body" let-author>
       <tr>
-        <td>{{author.id}}</td>
+        <td>
+          <a routerLink="/authorDetails/{{author.id}}">
+            {{author.id}}
+          </a>
+        </td>
         <td>{{author.name}}</td>
         <td>{{author.country}}</td>
       </tr>
