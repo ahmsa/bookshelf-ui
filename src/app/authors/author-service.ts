@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { from, Observable, of } from "rxjs";
@@ -12,7 +12,8 @@ export class AuthorService {
   authorMap: Map<number | null, Author> = new Map<number | null, Author>();
 
   private readonly URL = `${environment.baseUrl}/authors`;
-  public constructor(private http: HttpClient) {}
+
+  private readonly http: HttpClient = inject(HttpClient);
 
   public getAllAuthors() : Observable<Author[]> {
     if(this.authorMap.size > 0) {

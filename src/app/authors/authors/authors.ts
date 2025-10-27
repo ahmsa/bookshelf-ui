@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthorService } from '../author-service';
 import { AsyncPipe } from '@angular/common';
 import { TableModule } from "primeng/table";
@@ -17,9 +17,8 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./authors.css']
 })
 export class Authors {
+  private authorsService: AuthorService = inject(AuthorService);
   public authors$: Observable<Author[]> = this.authorsService.getAllAuthors();
-
-  public constructor(private authorsService: AuthorService) { }
 
 
 delete(id: number) {
