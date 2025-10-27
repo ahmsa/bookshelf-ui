@@ -16,7 +16,6 @@ export class AuthorService {
 
   public getAllAuthors() : Observable<Author[]> {
     if(this.authorMap.size > 0) {
-      console.log('Returning authors from cache');
       return of(Array.from(this.authorMap.values()));
     }
 
@@ -47,9 +46,8 @@ export class AuthorService {
       })
     );
   }
-  
+
   getAuthorById(id: number): Observable<Author | null> {
-    console.log(`Fetching author with ID: ${id}`);
     const author = this.authorMap.get(id);
     if (author !== undefined) {
       return of(author);

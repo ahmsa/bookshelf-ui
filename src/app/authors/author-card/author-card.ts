@@ -23,7 +23,6 @@ export class AuthorCard implements OnInit {
   private authorService: AuthorService = inject(AuthorService);
 
   ngOnInit() {
-    console.log('AuthorCard initialized');
     this.activatedRoute.paramMap.subscribe(params => {
       let id = params.get('id');
       if (id) {
@@ -37,10 +36,8 @@ export class AuthorCard implements OnInit {
   }
 
   onSubmit(formData: Author) {
-    console.log('Form submitted:', formData);
     this.authorService.saveAuthor(formData).subscribe({
       next: (response) => {
-        console.log('Author saved successfully:', response);
         // Navigate back after save completes so the authors list can show the new author
         this.location.back();
       },

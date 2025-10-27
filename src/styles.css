@@ -296,3 +296,34 @@ svg#clouds {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Style the table container for width */
+.p-datatable {
+  width: 98%;
+  margin: 0 auto; /* Center the table */
+}
+
+/* Style the table header to match banner */
+.p-datatable .p-datatable-header,
+.p-datatable .p-datatable-thead > tr > th {
+  background-color: var(--primary-color);
+  color: white;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  border: none;
+  padding: 0.5rem 1rem; /* Reduced vertical padding to make header thinner */
+  height: 40px; /* Fixed height for thin header */
+  line-height: 24px; /* Vertically center the text */
+}
+
+/* Optional: Add some hover effect to the header cells */
+.p-datatable .p-datatable-thead > tr > th:hover {
+  background-color: var(--primary-color);
+  opacity: 0.9;
+}
+
+/* Adjust cell padding to match header */
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 0.5rem 1rem;
+}

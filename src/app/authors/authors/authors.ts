@@ -21,9 +21,8 @@ export class Authors {
 
   public constructor(private authorsService: AuthorService) { }
 
-  
+
 delete(id: number) {
-  console.log(`Deleting author with ID: ${id}`);
   this.authorsService.deleteAuthor(id).subscribe(() => {
     this.authors$ = this.authorsService.getAllAuthors();
   });
