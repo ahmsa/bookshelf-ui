@@ -1,4 +1,4 @@
-import { Component, inject, Inject, OnInit } from '@angular/core';
+import { Component, inject,  Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Author } from 'src/data/author';
 import { AuthorService } from '../author-service';
@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
   standalone: true
 })
 export class AuthorCard implements OnInit {
+  @Input() id?: string;
   author : Author = new Author();
 
   private activatedRoute = inject(ActivatedRoute);
@@ -24,9 +25,8 @@ export class AuthorCard implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
-      let id = params.get('id');
-      if (id) {
-        this.authorService.getAuthorById(+id).subscribe(author => {
+      if (this.id) {
+        this.authorService.getAuthorById(+this.id).subscribe(author => {
           if (author) {
             this.author = author;
           }

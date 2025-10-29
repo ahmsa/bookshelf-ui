@@ -45,7 +45,7 @@ export class GenreService {
     );
   }
 
-  public getGenreById(id: string): Observable<Genre> {
+  public getGenreById(id: number): Observable<Genre> {
     const cachedGenre = this.allGenresCache.get(+id);
     if (cachedGenre) {
       return of(cachedGenre);
