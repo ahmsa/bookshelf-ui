@@ -4,12 +4,14 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Genre } from 'src/data/genre';
 import { GenreService } from '../genre-service';
 import { ActivatedRoute } from '@angular/router';
+import { SelectModule } from "primeng/select";
 
 @Component({
   selector: 'app-genre-card',
     imports: [
-        FormsModule,
-        ReactiveFormsModule
+      FormsModule,
+      ReactiveFormsModule,
+      SelectModule,
     ],
   templateUrl: './genre-card.html',
   styleUrls: ['./genre-card.css']
@@ -19,6 +21,7 @@ export class GenreCard {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private genreService: GenreService = inject(GenreService);
   genre : Genre = new Genre();
+  allGenresExculdingCurrent : Genre[] = [];
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -28,6 +31,11 @@ export class GenreCard {
         error: (error) => console.error('Error fetching genre:', error)
       });
     }
+
+    this.genreService.getAllGenres().subscribe({
+      next: (genres) => {
+        this.allGenresExculdingCurrent = genres.filter(g => g.id !== this.genre?.id);
+      }});
   }
 
   onCancel() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { Banner } from './banner/banner';
 import { MainMenu } from "./banner/main-menu-component/main-menu";
 
@@ -7,7 +7,7 @@ import { MainMenu } from "./banner/main-menu-component/main-menu";
     selector: 'app-root',
     templateUrl: './app.html',
     styleUrls: ['./app.css'],
-    imports: [Banner, RouterOutlet, MainMenu, RouterLink]
+    imports: [Banner, RouterOutlet, MainMenu]
 })
 export class App {
   title = 'bookshelf-ui';
