@@ -36,11 +36,24 @@ export class GenreService {
     );
   }
 
-  public deleteGenre(id: number){
+  public deleteGenre(id: number): Observable<null> {
     let param: HttpParams = new HttpParams().set("id", id);
-    this.http.delete<Genre>(`${this.URL}`, { params: param }).pipe(
+    return this.http.delete<null>(`${this.URL}`, { params: param }).pipe(
       tap(() => {
         this.allGenresCache.delete(id);
+      })
+    );
+  }
+
+  public getGenreById(id: string): Observable<Genre> {
+    const cachedGenre = this.allGenresCache.get(+id);
+    if (cachedGenre) {
+      return of(cachedGenre);
+    }
+
+    return this.http.get<Genre>(`${this.URL}/${id}`).pipe(
+      tap((genre) => {
+        this.allGenresCache.set(genre.id, genre);
       })
     );
   }

@@ -12,7 +12,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-genre >
       <tr>
-        <td><a routerLink="/authorDetails/{{genre.id}}">{{ genre.id }}</a></td>
+        <td><a routerLink="/genreDetails/{{genre.id}}">{{ genre.id }}</a></td>
         <td>{{ genre.name }}</td>
         <td>{{ genre.parentGenre?.name }}</td>
         <td>

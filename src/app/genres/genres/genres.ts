@@ -22,7 +22,8 @@ export class Genres {
   protected genres$: Observable<Genre[]> = this.genreService.getAllGenres();
 
   protected delete(id: number) {
-    this.genreService.deleteGenre(id);
-    this.genres$ = this.genreService.getAllGenres();
+    this.genreService.deleteGenre(id).subscribe(
+      () => this.genres$ = this.genreService.getAllGenres()
+    );
   }
 }

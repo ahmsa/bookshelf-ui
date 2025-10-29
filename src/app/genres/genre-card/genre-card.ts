@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Genre } from 'src/data/genre';
 import { GenreService } from '../genre-service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-genre-card',
@@ -15,10 +16,20 @@ import { GenreService } from '../genre-service';
 })
 export class GenreCard {
   private location: Location = inject(Location);
+  private route: ActivatedRoute = inject(ActivatedRoute);
   private genreService: GenreService = inject(GenreService);
   genre : Genre = new Genre();
 
-  
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.genreService.getGenreById(id).subscribe({
+        next: (genre) => this.genre = genre,
+        error: (error) => console.error('Error fetching genre:', error)
+      });
+    }
+  }
+
   onCancel() {
     this.location.back();
   }
