@@ -1,7 +1,7 @@
 import { Author } from "./author";
 
 export class Book {
-    id: number = 0;
+    id: number | null = null;
     title: string = '';
     authors : Author[] = [];
 }

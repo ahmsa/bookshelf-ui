@@ -1,1 +1,6 @@
-<p>books works!</p>
+@if(singleBook){
+  <app-book-details (close)="onCloseDetails($event)" [book]="selectedBook"></app-book-details>
+}
+@else {
+  <app-books-table (bookDetails)="onBookDetails($event)" [books$]="books$"></app-books-table>
+}
