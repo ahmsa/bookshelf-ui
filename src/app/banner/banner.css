@@ -7,17 +7,9 @@
 	/* Keep the menu inside the toolbar row and align vertically centered */
 	flex-basis: auto;
  	margin-top: 0;
- 	display: flex;
+ 	display: inline;
  	align-items: center;
  	margin-left: 8px; /* small gap after the icons */
-}
-
-/* On small screens, allow the menu to stack under the toolbar */
-@media screen and (max-width: 767px) {
-  .menu {
-    flex-basis: 100%;
-    margin-top: 8px;
-    justify-content: center;
-  }
+  color: white;
 }
 

@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Genre } from 'src/data/genre';
 import { GenreService } from '../genre-service';
@@ -16,7 +16,7 @@ import { SelectModule } from "primeng/select";
   templateUrl: './genre-card.html',
   styleUrls: ['./genre-card.css']
 })
-export class GenreCard {
+export class GenreCard implements OnInit {
   @Input() id?: string;
 
   private location: Location = inject(Location);
@@ -28,7 +28,7 @@ export class GenreCard {
   ngOnInit() {
     if (this.id) {
       this.genreService.getGenreById(+this.id).subscribe({
-        next: (genre) => this.genre = genre,
+        next: (genre) => this.genre = genre?? new Genre(),
         error: (error) => console.error('Error fetching genre:', error)
       });
     }
