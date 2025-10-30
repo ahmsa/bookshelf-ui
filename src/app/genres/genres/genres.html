@@ -8,6 +8,7 @@
         <th>Name</th>
         <th>Parent Genre</th>
         <th>Actions</th>
+        <th>Sub-Genres</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-genre >
@@ -16,7 +17,9 @@
         <td>{{ genre.name }}</td>
         <td>{{ genre.parentGenre?.name }}</td>
         <td>
-          <button class="button" (click)="delete(genre.id)">Delete</button>
+          <button [disabled]="genre.subGenres?.length > 0" class="button" (click)="delete(genre.id)">Delete</button>
+        </td>
+        <td>{{ genre.subGenres?.length }}</td>
       </tr>
     </ng-template>
   </p-table>
