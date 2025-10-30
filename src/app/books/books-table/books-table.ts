@@ -3,7 +3,6 @@ import { Book } from "../../../data/book";
 import { Observable } from "rxjs";
 import { AsyncPipe } from "@angular/common";
 import { PrimeTemplate } from "primeng/api";
-import { RouterLink } from "@angular/router";
 import { TableModule } from "primeng/table";
 import { BooksService } from "../books-service";
 
@@ -12,7 +11,6 @@ import { BooksService } from "../books-service";
   imports: [
     AsyncPipe,
     PrimeTemplate,
-    RouterLink,
     TableModule
   ],
   templateUrl: './books-table.html',
