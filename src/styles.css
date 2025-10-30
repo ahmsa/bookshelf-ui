@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #2c3052;
+  --primary-color: black;
   /* --primary-color: #005249; */
   --secondary-color: rgb(231, 76, 60); /* Example: a red color */
   --text-color: hsl(0, 0%, 20%); /* Example: a dark gray color */
@@ -326,4 +326,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* Adjust cell padding to match header */
 .p-datatable .p-datatable-tbody > tr > td {
   padding: 0.5rem 1rem;
+}
+
+.form-label {
+  font-weight: 600;
+  color: var(--primary-color);
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+.form-entry {
+  margin-bottom: 12px;
+  padding-right: 10px;
 }
