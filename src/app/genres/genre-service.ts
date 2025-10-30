@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { Genre } from "../../data/genre";
 import { environment } from "../../environments/environment";
-import { tap } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -40,12 +40,10 @@ export class GenreService {
     );
   }
 
-  public getGenreById(id: number): Observable<Genre> {
+  public getGenreById(id: number): Observable<Genre | null> {
     if(!this.allGenresCache || this.allGenresCache.size === 0) {
-      this.populateCache().subscribe(
-        () => {
-          return of(this.getGenreFromCache(id));
-        }
+      return this.populateCache().pipe(
+        map(() => this.getGenreFromCache(id))
       );
     }
 

@@ -20,20 +20,14 @@ export class AuthorService {
       return of(Array.from(this.authorMap.values()));
     }
 
-    return this.http.get<Author[]>(this.URL).pipe(
-      tap((authors) => {
-        authors.forEach((author) => {
-          this.authorMap.set(author.id, author);
-        });
-      })
-    );
+    return this.populateCache();
   }
 
   public saveAuthor(author: Author) : Observable<Author> {
     const headers = { 'Content-Type': 'application/json' };
     return this.http.post<Author>(`${this.URL}/save`, author, { headers }).pipe(
       tap((savedAuthor) => {
-        this.authorMap.set(savedAuthor.id, savedAuthor);
+        this.populateCache();
       })
     );
   }
@@ -43,30 +37,38 @@ export class AuthorService {
     param.set('id', id);
     return this.http.delete<void>(this.URL + `?id=${id}`, { params: param }).pipe(
       tap(() => {
-        this.authorMap.delete(id);
+        this.populateCache();
       })
     );
   }
 
   getAuthorById(id: number): Observable<Author | null> {
-    const author = this.authorMap.get(id);
-    if (author !== undefined) {
-      return of(author);
+    if(this.authorMap.size === 0) {
+      return this.populateCache().pipe(
+        map(() => this.getAuthorFromCache(id))
+      );
     }
 
-    return this.getAllAuthors().pipe(
+    return of(this.getAuthorFromCache(id));
+  }
+
+  private getAuthorFromCache(id: number): Author {
+    let author = this.authorMap.get(id);
+
+    if(!author) {
+      throw new Error('Author not found in cache');
+    }
+
+    return author;
+  }
+
+  private populateCache(): Observable<Author[]> {
+    this.authorMap = new Map<number | null, Author>();
+    return this.http.get<Author[]>(this.URL).pipe(
       tap((authors) => {
-        const foundAuthor = authors.find(a => a.id === id);
-        if (foundAuthor) {
-          this.authorMap.set(foundAuthor.id, foundAuthor);
+        for(let author of authors){
+          this.authorMap.set(author.id, author);
         }
-      }),
-      // Map to the specific author after fetching all
-      // Use map to transform the array to a single Author or null
-      // Import 'map' from 'rxjs/operators' if not already imported
-      map((authors: Author[]) => {
-        const foundAuthor = authors.find(a => a.id === id);
-        return foundAuthor || null;
       })
     );
   }
