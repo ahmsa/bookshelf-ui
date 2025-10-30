@@ -19,19 +19,14 @@ export class GenreService {
     if(this.allGenresCache.size > 0) {
       return of(Array.from(this.allGenresCache.values()));
     }
-    return this.http.get<Genre[]>(this.URL).pipe(
-      tap((genres) => {
-        genres.forEach((genre) => {
-          this.allGenresCache.set(genre.id, genre);
-        })
-      })
-    );
+
+    return this.populateCache();
   }
 
   public saveGenre(genre: Genre) : Observable<Genre> {
     return this.http.post<Genre>(`${this.URL}/save`, genre).pipe(
       tap((savedGenre) => {
-        this.allGenresCache.set(savedGenre.id, savedGenre);
+        this.populateCache();
       })
     );
   }
@@ -40,20 +35,40 @@ export class GenreService {
     let param: HttpParams = new HttpParams().set("id", id);
     return this.http.delete<null>(`${this.URL}`, { params: param }).pipe(
       tap(() => {
-        this.allGenresCache.delete(id);
+        this.populateCache();
       })
     );
   }
 
   public getGenreById(id: number): Observable<Genre> {
-    const cachedGenre = this.allGenresCache.get(+id);
-    if (cachedGenre) {
-      return of(cachedGenre);
+    if(!this.allGenresCache || this.allGenresCache.size === 0) {
+      this.populateCache().subscribe(
+        () => {
+          return of(this.getGenreFromCache(id));
+        }
+      );
     }
 
-    return this.http.get<Genre>(`${this.URL}/${id}`).pipe(
-      tap((genre) => {
-        this.allGenresCache.set(genre.id, genre);
+    return of(this.getGenreFromCache(id));
+  }
+
+  private getGenreFromCache(id: number): Genre {
+    let genre = this.allGenresCache.get(id);
+
+    if(!genre) {
+      throw new Error('Genre not found in cache');
+    }
+
+    return genre;
+  }
+
+  private populateCache(): Observable<Genre[]> {
+    this.allGenresCache = new Map<number | null, Genre>();
+    return this.http.get<Genre[]>(this.URL).pipe(
+      tap((genres) => {
+        for(let genre of genres){
+          this.allGenresCache.set(genre.id, genre);
+        }
       })
     );
   }
