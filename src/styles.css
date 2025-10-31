@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #2c3052;
+  --primary-color: black;
   /* --primary-color: #005249; */
   --secondary-color: rgb(231, 76, 60); /* Example: a red color */
   --text-color: hsl(0, 0%, 20%); /* Example: a dark gray color */
@@ -23,7 +23,7 @@ p {
 }
 
 .spacer {
-  flex: 1;
+  flex: 0.10;
 }
 
 .toolbar {
@@ -161,6 +161,7 @@ a:visited,
 a:hover {
   color: #1976d2;
   text-decoration: none;
+  cursor: pointer;
 }
 
 a:hover {
@@ -296,3 +297,46 @@ svg#clouds {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Style the table container for width */
+.p-datatable {
+  width: 98%;
+  margin: 0 auto; /* Center the table */
+}
+
+/* Style the table header to match banner */
+.p-datatable .p-datatable-header,
+.p-datatable .p-datatable-thead > tr > th {
+  background-color: var(--primary-color);
+  color: white;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  border: none;
+  padding: 0.5rem 1rem; /* Reduced vertical padding to make header thinner */
+  height: 40px; /* Fixed height for thin header */
+  line-height: 24px; /* Vertically center the text */
+}
+
+/* Optional: Add some hover effect to the header cells */
+.p-datatable .p-datatable-thead > tr > th:hover {
+  background-color: var(--primary-color);
+  opacity: 0.9;
+}
+
+/* Adjust cell padding to match header */
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 0.5rem 1rem;
+}
+
+.form-label {
+  font-weight: 600;
+  color: var(--primary-color);
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+.form-entry {
+  margin-bottom: 12px;
+  padding-right: 10px;
+}

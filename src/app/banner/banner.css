@@ -1,0 +1,15 @@
+/* Ensure toolbar can wrap and force the menu (ng-content) to take a full row */
+.toolbar {
+	flex-wrap: wrap;
+}
+
+.menu {
+	/* Keep the menu inside the toolbar row and align vertically centered */
+	flex-basis: auto;
+ 	margin-top: 0;
+ 	display: inline;
+ 	align-items: center;
+ 	margin-left: 8px; /* small gap after the icons */
+  color: white;
+}
+

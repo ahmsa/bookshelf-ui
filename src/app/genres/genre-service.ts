@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { Genre } from "../../data/genre";
 import { environment } from "../../environments/environment";
+import { map, tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +11,63 @@ import { environment } from "../../environments/environment";
 export class GenreService {
   private readonly URL: string = `${environment.baseUrl}/genres`;
 
-  public constructor(private readonly http: HttpClient) { }
+  private readonly http: HttpClient = inject(HttpClient);
+
+  private allGenresCache: Map<number | null, Genre> = new Map<number | null, Genre>();
 
   public getAllGenres(): Observable<Genre[]> {
-    return this.http.get<Genre[]>(this.URL);
+    if(this.allGenresCache.size > 0) {
+      return of(Array.from(this.allGenresCache.values()));
+    }
+
+    return this.populateCache();
   }
 
   public saveGenre(genre: Genre) : Observable<Genre> {
-    return this.http.put<Genre>(`${this.URL}/save`, genre);
+    return this.http.post<Genre>(`${this.URL}/save`, genre).pipe(
+      tap((savedGenre) => {
+        this.populateCache();
+      })
+    );
   }
 
-  public deleteGenre(id: number){
+  public deleteGenre(id: number): Observable<null> {
     let param: HttpParams = new HttpParams().set("id", id);
-    this.http.delete<Genre>(`${this.URL}/delete`, { params: param });
+    return this.http.delete<null>(`${this.URL}`, { params: param }).pipe(
+      tap(() => {
+        this.populateCache();
+      })
+    );
+  }
+
+  public getGenreById(id: number): Observable<Genre | null> {
+    if(!this.allGenresCache || this.allGenresCache.size === 0) {
+      return this.populateCache().pipe(
+        map(() => this.getGenreFromCache(id))
+      );
+    }
+
+    return of(this.getGenreFromCache(id));
+  }
+
+  private getGenreFromCache(id: number): Genre {
+    let genre = this.allGenresCache.get(id);
+
+    if(!genre) {
+      throw new Error('Genre not found in cache');
+    }
+
+    return genre;
+  }
+
+  private populateCache(): Observable<Genre[]> {
+    this.allGenresCache = new Map<number | null, Genre>();
+    return this.http.get<Genre[]>(this.URL).pipe(
+      tap((genres) => {
+        for(let genre of genres){
+          this.allGenresCache.set(genre.id, genre);
+        }
+      })
+    );
   }
 }
