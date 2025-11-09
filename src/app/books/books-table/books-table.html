@@ -7,6 +7,7 @@
         <th>ID</th>
         <th>Title</th>
         <th>Publication Year</th>
+        <th>Authors</th>
         <th>Actions</th>
       </tr>
     </ng-template>
@@ -19,6 +20,14 @@
         </td>
         <td>{{book.title}}</td>
         <td>{{book.publicationYear}}</td>
+        <td>
+          @for (author of book.authors; track author;) {
+            @if(!$first){
+              {{", "}}
+            }
+            {{author.name}}
+          }
+        </td>
         <td>
           <button class="button" (click)="delete(book.id)">Delete</button>
         </td>
