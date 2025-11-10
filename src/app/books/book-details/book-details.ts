@@ -36,8 +36,8 @@ export class BookDetails {
     authorIds: number[] = [];
     genreIds: number[] = [];
   
-    compareAuthors(author1: any, author2: any) {
-      return author1 && author2 && author1.id === author2.id;
+    compareObjects(obj1: any, obj2: any) {
+      return obj1 && obj2 && obj1.id === obj2.id;
     }
   
 

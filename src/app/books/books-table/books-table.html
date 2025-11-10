@@ -8,6 +8,7 @@
         <th>Title</th>
         <th>Publication Year</th>
         <th>Authors</th>
+        <th>Genres </th>
         <th>Actions</th>
       </tr>
     </ng-template>
@@ -26,6 +27,14 @@
               {{", "}}
             }
             {{author.name}}
+          }
+        </td>
+        <td>
+          @for (genre of book.genres; track genre;) {
+            @if(!$first){
+              {{", "}}
+            }
+            {{genre.name}}
           }
         </td>
         <td>
