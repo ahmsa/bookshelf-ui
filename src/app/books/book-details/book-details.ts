@@ -33,7 +33,16 @@ export class BookDetails {
     allAuthors$ = this.authorService.getAllAuthors();
     allGenres$ = this.genreService.getAllGenres();
 
+    authorIds: number[] = [];
+    genreIds: number[] = [];
+  
+    compareObjects(obj1: any, obj2: any) {
+      return obj1 && obj2 && obj1.id === obj2.id;
+    }
+  
+
   protected onSubmit(book: Book) {
+    console.log(book);
     this.booksService.saveBook(book).subscribe(() => {
 
       this.close.emit(true);

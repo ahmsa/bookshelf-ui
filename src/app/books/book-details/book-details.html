@@ -8,19 +8,32 @@
   <label class="form-label" for="publicationYear">Publication Year:</label>
   <input class="form-entry" type="number" id="publicationYear" name="publicationYear" [(ngModel)]="book.publicationYear" required>
 
-  <mat-form-field>
-    <mat-label class="form-label" for="author" multiple>Authors</mat-label>
-    <mat-select class="form-entry" [ngModel]="book.authors" multiple>
-      @for (author of allAuthors$ | async; track author) {
-        <mat-option [value]="author">{{author.name}}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
-  <mat-select class="form-entry" [(ngModel)]="book.authors" multiple>
-    @for (author of allAuthors$ | async; track author) {
-      <mat-option [value]="author">{{ author.name }}</mat-option>
-    }
-  </mat-select>
+  @if (allAuthors$ | async; as authors) {
+    <mat-form-field class="form-label form-entry">
+      <mat-label class="form-label" for="author" multiple>Authors</mat-label>
+      <mat-select id="authors" name="authors" class="form-entry" [(ngModel)]="book.authors" [compareWith]="compareObjects" multiple>
+        @for (author of authors; track author) {
+          <mat-option [value]="author">{{author.name}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  } @else {
+    <div>Loading authors...</div>
+  }
+
+
+  @if (allGenres$ | async; as genres) {
+    <mat-form-field class="form-label form-entry">
+      <mat-label class="form-label" for="genre" multiple>Genres</mat-label>
+      <mat-select id="genres" name="genres" class="form-entry" [(ngModel)]="book.genres" [compareWith]="compareObjects" multiple>
+        @for (genre of genres; track genre) {
+          <mat-option [value]="genre">{{genre.name}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  } @else {
+    <div>Loading genres...</div>
+  }
 
   <button type="submit" [disabled]="userForm.invalid">Submit</button>
   <button type="button" (click)="onCancel()">Cancel</button>
