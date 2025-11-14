@@ -7,6 +7,8 @@
         <th>ID</th>
         <th>Name</th>
         <th>Country</th>
+        <th>books</th>
+        <th>Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-author>
@@ -18,6 +20,9 @@
         </td>
         <td>{{author.name}}</td>
         <td>{{author.country}}</td>
+        <td>
+          {{ author.books?.length }}
+        </td>
         <td>
           <button class="button" (click)="delete(author.id)">Delete</button>
         </td>
