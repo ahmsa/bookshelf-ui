@@ -23,4 +23,8 @@ export class BooksService {
   public deleteBook(id: number): Observable<void> {
     return this.httpClient.delete<void>(this.URL + `?id=${id}`);
   }
+
+  public getBookById(id: number): Observable<Book> {
+    return this.httpClient.get<Book>(this.URL + `?id=${id}`);
+  }
 }

@@ -1,7 +1,10 @@
 @if (books$ | async; as books) {
   <!-- This block is displayed when the data arrives -->
-  <a (click)="onBookDetails(null)" class="button">Add Book</a>
-  <p-table [value]="books">
+  <a (click)="onBookDetails(null)" class="button">Add Book</a> 
+  <p-table #dt [value]="books" [globalFilterFields]="['id', 'title', 'publicationYear', 'authors.name', 'genres.name']" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="caption">
+            <input type="text" pInputText placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')">
+        </ng-template>
     <ng-template pTemplate="header">
       <tr>
         <th>ID</th>
@@ -48,4 +51,3 @@
   <!-- This block is displayed while the data is loading -->
   <div>Loading items...</div>
 }
-
